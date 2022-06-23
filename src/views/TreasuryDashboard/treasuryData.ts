@@ -1,5 +1,6 @@
 // TODO: add paramaterization
 import { t } from "@lingui/macro";
+import { Theme } from "@mui/material/styles/createTheme";
 
 export const treasuryDataQuery = `
 query {
@@ -50,136 +51,151 @@ query {
 }
 `;
 
+export const standardThemeColors = (theme: Theme) => {
+  return [theme.colors.primary[300], theme.palette.text.secondary, theme.colors.primary[100]];
+};
+
 // export default treasuryData;
-export const bulletpoints = {
-  tvl: [
-    {
-      right: 20,
-      top: -12,
-      background: "linear-gradient(180deg, #768299 -10%, #98B3E9 100%)",
-    },
-  ],
-  coin: [
-    {
-      right: 15,
-      top: -12,
-      background: "#F5AC37",
-    },
-    {
-      right: 25,
-      top: -12,
-      background: "#768299",
-    },
-    {
-      right: 29,
-      top: -12,
-      background: "#DC30EB",
-    },
-    {
-      right: 29,
-      top: -12,
-      background: "#4C8C2A",
-    },
-    {
-      right: 29,
-      top: -12,
-      background: "#c9184a",
-    },
-    {
-      right: 29,
-      top: -12,
-      background: "#4E1F71",
-    },
-    {
-      right: 29,
-      top: -12,
-      background: "#8AECCD",
-    },
-  ],
-  rfv: [
-    {
-      right: 15,
-      top: -12,
-      background: "#F5AC37",
-    },
-    {
-      right: 25,
-      top: -12,
-      background: "#768299",
-    },
-    {
-      right: 29,
-      top: -12,
-      background: "#c9184a",
-    },
-    {
-      right: 29,
-      top: -12,
-      background: "#4E1F71",
-    },
-  ],
-  holder: [
-    {
-      right: 40,
-      top: -12,
-      background: "#A3A3A3",
-    },
-  ],
-  apy: [
-    {
-      right: 20,
-      top: -12,
-      background: "#49A1F2",
-    },
-  ],
-  runway: [
-    {
-      right: 45,
-      top: -12,
-      background: "#000000",
-    },
-    {
-      right: 48,
-      top: -12,
-      background: "#2EC608",
-    },
-    {
-      right: 48,
-      top: -12,
-      background: "#49A1F2",
-    },
-    {
-      right: 48,
-      top: -12,
-      background: "#c9184a",
-    },
-  ],
-  staked: [
-    {
-      right: 45,
-      top: -11,
-      background: "linear-gradient(180deg, #55EBC7 -10%, rgba(71, 172, 235, 0) 100%)",
-    },
-    {
-      right: 68,
-      top: -12,
-      background: "rgba(151, 196, 224, 0.2)",
-      border: "1px solid rgba(54, 56, 64, 0.5)",
-    },
-  ],
-  pol: [
-    {
-      right: 15,
-      top: -12,
-      background: "linear-gradient(180deg, rgba(56, 223, 63, 1) -10%, rgba(182, 233, 152, 1) 100%)",
-    },
-    {
-      right: 25,
-      top: -12,
-      background: "rgba(219, 242, 170, 1)",
-      border: "1px solid rgba(118, 130, 153, 1)",
-    },
-  ],
+export const bulletpoints = (theme: Theme) => {
+  const colors = standardThemeColors(theme);
+
+  return {
+    liqb: [
+      {
+        right: 20,
+        top: -12,
+        background: colors[0],
+      },
+    ],
+    tvl: [
+      {
+        right: 20,
+        top: -12,
+        background: "linear-gradient(180deg, #768299 -10%, #98B3E9 100%)",
+      },
+    ],
+    coin: [
+      {
+        right: 15,
+        top: -12,
+        background: "#F5AC37",
+      },
+      {
+        right: 25,
+        top: -12,
+        background: "#768299",
+      },
+      {
+        right: 29,
+        top: -12,
+        background: "#DC30EB",
+      },
+      {
+        right: 29,
+        top: -12,
+        background: "#4C8C2A",
+      },
+      {
+        right: 29,
+        top: -12,
+        background: "#c9184a",
+      },
+      {
+        right: 29,
+        top: -12,
+        background: "#4E1F71",
+      },
+      {
+        right: 29,
+        top: -12,
+        background: "#8AECCD",
+      },
+    ],
+    rfv: [
+      {
+        right: 15,
+        top: -12,
+        background: "#F5AC37",
+      },
+      {
+        right: 25,
+        top: -12,
+        background: "#768299",
+      },
+      {
+        right: 29,
+        top: -12,
+        background: "#c9184a",
+      },
+      {
+        right: 29,
+        top: -12,
+        background: "#4E1F71",
+      },
+    ],
+    holder: [
+      {
+        right: 40,
+        top: -12,
+        background: "#A3A3A3",
+      },
+    ],
+    apy: [
+      {
+        right: 20,
+        top: -12,
+        background: "#49A1F2",
+      },
+    ],
+    runway: [
+      {
+        right: 45,
+        top: -12,
+        background: "#000000",
+      },
+      {
+        right: 48,
+        top: -12,
+        background: "#2EC608",
+      },
+      {
+        right: 48,
+        top: -12,
+        background: "#49A1F2",
+      },
+      {
+        right: 48,
+        top: -12,
+        background: "#c9184a",
+      },
+    ],
+    staked: [
+      {
+        right: 45,
+        top: -11,
+        background: "linear-gradient(180deg, #55EBC7 -10%, rgba(71, 172, 235, 0) 100%)",
+      },
+      {
+        right: 68,
+        top: -12,
+        background: "rgba(151, 196, 224, 0.2)",
+        border: "1px solid rgba(54, 56, 64, 0.5)",
+      },
+    ],
+    pol: [
+      {
+        right: 15,
+        top: -12,
+        background: "linear-gradient(180deg, rgba(56, 223, 63, 1) -10%, rgba(182, 233, 152, 1) 100%)",
+      },
+      {
+        right: 25,
+        top: -12,
+        background: "rgba(219, 242, 170, 1)",
+        border: "1px solid rgba(118, 130, 153, 1)",
+      },
+    ],
+  };
 };
 
 export const tooltipItems = {

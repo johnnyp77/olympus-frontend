@@ -4,7 +4,7 @@ import Chart from "src/components/Chart/Chart";
 import { formatCurrency, trim } from "src/helpers";
 import { useProtocolMetrics } from "src/hooks/useProtocolMetrics";
 
-import { bulletpoints, itemType, tooltipInfoMessages, tooltipItems } from "../../treasuryData";
+import { bulletpoints, itemType, standardThemeColors, tooltipInfoMessages, tooltipItems } from "../../treasuryData";
 
 export const Graph = ({ children }) => <>{children}</>;
 
@@ -21,7 +21,7 @@ export const TotalValueDepositedGraph = () => {
       dataKey={["totalValueLocked"]}
       headerText={t`Total Value Deposited`}
       stopColor={[["#768299", "#98B3E9"]]}
-      bulletpointColors={bulletpoints.tvl}
+      bulletpointColors={bulletpoints(theme).tvl}
       infoTooltipMessage={tooltipInfoMessages().tvl}
       expandedGraphStrokeColor={theme.palette.graphStrokeColor}
       headerSubText={`${data && formatCurrency(data[0].totalValueLocked)}`}
@@ -32,6 +32,7 @@ export const TotalValueDepositedGraph = () => {
 export const LiquidBackingGraph = () => {
   const theme = useTheme();
   const { data } = useProtocolMetrics();
+  const standardColors = standardThemeColors(theme);
 
   return (
     <Chart
@@ -41,8 +42,8 @@ export const LiquidBackingGraph = () => {
       itemNames={tooltipItems.liqb}
       dataKey={["treasuryLiquidBacking"]}
       headerText={t`Liquid Backing`}
-      stopColor={[["#768299", "#98B3E9"]]}
-      bulletpointColors={bulletpoints.tvl}
+      stopColor={[[standardColors[0], standardColors[0]]]} // No gradient
+      bulletpointColors={bulletpoints(theme).liqb}
       infoTooltipMessage={tooltipInfoMessages().liqb}
       expandedGraphStrokeColor={theme.palette.graphStrokeColor}
       headerSubText={`${data && formatCurrency(data[0].treasuryLiquidBacking)}`}
@@ -53,6 +54,7 @@ export const LiquidBackingGraph = () => {
 export const MarketValueGraph = () => {
   const theme = useTheme();
   const { data } = useProtocolMetrics();
+  const standardColors = standardThemeColors(theme);
 
   return (
     <Chart
@@ -60,6 +62,8 @@ export const MarketValueGraph = () => {
       data={data}
       dataKey={["treasuryStableValue", "treasuryVolatileValue", "treasuryLPValue"]}
       stopColor={[
+        [standardColors[0], standardColors[0]],
+        [standardColors[1], standardColors[1]],
         ["#F5AC37", "#F5AC37"],
         ["#768299", "#768299"],
         ["#DC30EB", "#DC30EB"],
@@ -70,7 +74,7 @@ export const MarketValueGraph = () => {
       ]}
       headerText={t`Market Value of Treasury Assets`}
       headerSubText={`${data && formatCurrency(data[0].treasuryMarketValue)}`}
-      bulletpointColors={bulletpoints.coin}
+      bulletpointColors={bulletpoints(theme).coin}
       itemNames={tooltipItems.marketValueComponents}
       itemType={itemType.dollar}
       infoTooltipMessage={tooltipInfoMessages().mvt}
@@ -105,7 +109,7 @@ export const RiskFreeValueGraph = () => {
       ]}
       headerText={t`Risk Free Value of Treasury Assets`}
       headerSubText={`${data && formatCurrency(data[0].treasuryRiskFreeValue)}`}
-      bulletpointColors={bulletpoints.rfv}
+      bulletpointColors={bulletpoints(theme).rfv}
       itemNames={tooltipItems.rfv}
       itemType={itemType.dollar}
       infoTooltipMessage={tooltipInfoMessages().rfv}
@@ -128,7 +132,7 @@ export const ProtocolOwnedLiquidityGraph = () => {
       itemNames={tooltipItems.pol}
       itemType={itemType.percentage}
       dataKey={["treasuryOhmDaiPOL"]}
-      bulletpointColors={bulletpoints.pol}
+      bulletpointColors={bulletpoints(theme).pol}
       infoTooltipMessage={tooltipInfoMessages().pol}
       headerText={t`Protocol Owned Liquidity OHM-DAI`}
       expandedGraphStrokeColor={theme.palette.graphStrokeColor}
@@ -161,7 +165,7 @@ export const OHMStakedGraph = () => {
       headerText={t`OHM Staked`}
       stopColor={[["#55EBC7", "#47ACEB"]]}
       margin={{ left: 30 }}
-      bulletpointColors={bulletpoints.staked}
+      bulletpointColors={bulletpoints(theme).staked}
       infoTooltipMessage={tooltipInfoMessages().staked}
       expandedGraphStrokeColor={theme.palette.graphStrokeColor}
       headerSubText={`${staked && trim(staked[0].staked, 2)}% `}
@@ -175,7 +179,7 @@ export const RunwayAvailableGraph = () => {
 
   const runway = data && data.filter(metric => metric.runway10k > 5);
 
-  const [current, ...others] = bulletpoints.runway;
+  const [current, ...others] = bulletpoints(theme).runway;
   const runwayBulletpoints = [{ ...current, background: theme.palette.text.primary }, ...others];
   const colors = runwayBulletpoints.map(b => b.background);
 

@@ -69,7 +69,7 @@ const MetricsDashboard = () => (
                 headerText="Holders"
                 stroke={[theme.palette.text.secondary]}
                 headerSubText={`${data.length > 0 && data[0].holders}`}
-                bulletpointColors={bulletpoints.holder}
+                bulletpointColors={bulletpoints(theme).holder}
                 itemNames={tooltipItems.holder}
                 itemType={undefined}
                 infoTooltipMessage={tooltipInfoMessages().holder}
